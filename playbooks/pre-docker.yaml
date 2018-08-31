@@ -1,0 +1,4 @@
+- name: executando a role de pre requisitos para o bluegreen deploy
+  hosts: docker 
+  roles:
+   - pre-docker  

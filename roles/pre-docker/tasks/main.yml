@@ -1,0 +1,21 @@
+---
+# tasks file for pre-docker
+
+- name: garantindo os pacotes basicos docker-ce nginx e python-pip 
+  package: 
+   name: 
+    - docker-ce
+    - nginx 
+    - python-pip 
+
+- name: garantindo o docker-py 
+  pip:
+   name: docker-py 
+
+- name: garantindo os servicos docker e nginx rodando 
+  service: 
+   name: "{{item}}"
+   state: started 
+  with_items:
+   - nginx
+   - docker 
