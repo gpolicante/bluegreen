@@ -1,0 +1,10 @@
+
+
+- name: criando usuarios padroes 
+  user:
+   name: "{{item}}"
+   shell: /bin/bash
+  with_items:
+    - developer
+    - suporte
+    - "{{meunome}}" 

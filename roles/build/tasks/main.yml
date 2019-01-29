@@ -1,0 +1,22 @@
+---
+# tasks file for build
+
+- name: garantindo os pacotes instalados 
+  package:
+   name: "{{item}}"
+  with_items:
+   - nginx 
+   - python-pip 
+   - docker-ce 
+
+- name: garantindo os servicos rodando 
+  service:
+   name: "{{item}}"
+   state: started
+  with_items:
+   - docker
+   - nginx 
+
+- name: garantindo o docker-py 
+  pip:
+   name: docker-py

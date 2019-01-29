@@ -1,0 +1,9 @@
+
+- name: instalando o servidor web 
+  package:
+   name: "{{item.nome}}"
+  when: ansible_os_family == item.distro
+  with_items:
+    - { nome: apache2, distro: "Debian" }
+    - { nome: httpd, distro: "RedHat" }
+  notify: start_centos 

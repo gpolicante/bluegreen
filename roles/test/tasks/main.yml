@@ -1,0 +1,28 @@
+---
+# tasks file for test
+
+- name: pegando o ip do container que esta no ar 
+  stat: 
+   path: /etc/nginx/sites-enabled/green.conf 
+  register: vhost 
+
+- name: pegando o ip do green 
+  shell: "docker exec green hostname -I "
+  when: vhost.stat.exists == True 
+  register: ipgreen
+
+- name: pegando o ip do blue 
+  shell: "docker exec blue hostname -I "
+  when: vhost.stat.exists == False 
+  register: ipblue
+
+- name: consultando o container que esta no ar 
+  uri:
+   url: "http://{{ipblue.stdout}}"
+  when: vhost.stat.exists == False 
+
+
+- name: consultando o container que esta no ar 
+  uri:
+   url: "http://{{ipgreen.stdout}}"
+  when: vhost.stat.exists == True 

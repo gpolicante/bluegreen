@@ -1,0 +1,6 @@
+
+
+- name: realizando teste do deploy 
+  hosts: docker
+  roles:
+   - test

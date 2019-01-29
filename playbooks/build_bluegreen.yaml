@@ -1,0 +1,5 @@
+
+- name: criando o ambiente como codigo
+  hosts: docker 
+  roles:
+   - build

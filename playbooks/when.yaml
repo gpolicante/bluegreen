@@ -1,0 +1,51 @@
+
+- name: criando condicoes 
+  hosts: all 
+  tasks:
+   - name: instalando pacotes para debian 
+     apt:
+      name: "{{item}}" 
+     when: ansible_os_family == "Debian"
+     with_items:
+       - vim 
+       - htop
+       - cowsay
+       - figlet 
+       - git
+ 
+   - name: instalando pacotes para centos
+     yum: 
+      name: "{{item}}"
+     when: ansible_os_family == "RedHat" 
+     with_items:
+      - epel-release
+      - git 
+      - figlet
+
+   - name: adicionando usuarios padroes 
+     user:
+      name: "{{item.nome}}"  
+      shell: "{{item.base}}"
+     with_items: 
+       - { nome: gabriel, base: "/bin/bash"  }
+       - { nome: jorge, base: "/bin/bash" } 
+       - { nome: judith, base: "/bin/bash" } 
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+

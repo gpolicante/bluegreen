@@ -1,0 +1,5 @@
+
+- name: criando minha primeira infraestrutura como codigo full 
+  hosts: all
+  roles:
+   - web 

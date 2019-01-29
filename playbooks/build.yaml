@@ -1,0 +1,12 @@
+- name: executando a playbook remota 
+  hosts: docker 
+  tasks:
+   - name: instalando dependencia do docker para ansible
+     package:
+      name: python-pip
+
+   - name: instalando o modulo do docker 
+     pip:
+      name: docker-py 
+
+

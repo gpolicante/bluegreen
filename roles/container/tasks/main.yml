@@ -1,0 +1,12 @@
+---
+# tasks file for container
+
+- name: garantindo meus containers no ar 
+  docker_container:
+   name: "{{item.nome}}"
+   image: httpd
+   volumes:
+    - "{{item.volume}}:/usr/local/apache2/htdocs/"
+  with_items:
+   - { nome: blue, volume: /srv/blue } 
+   - { nome: green, volume: /srv/green }  

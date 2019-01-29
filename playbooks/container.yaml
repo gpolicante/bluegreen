@@ -1,0 +1,11 @@
+- name: criando container 
+  hosts: docker 
+  tasks:
+    - name: criando meu container 
+      docker_container:
+       name: jenkins 
+       image: httpd
+       volumes:
+         - /srv/site:/usr/local/apache2/htdocs/
+       ports:
+         - 8585:80 

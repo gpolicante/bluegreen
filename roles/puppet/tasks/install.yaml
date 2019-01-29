@@ -1,0 +1,13 @@
+
+- name: instalando o puppetserver
+  package:
+   name: puppetserver
+   update_cache: yes 
+  when: ansible_hostname == "devops" 
+
+- name: intalando o puppet-agent 
+  package: 
+    name: puppet-agent 
+    update_cache: yes 
+  
+  

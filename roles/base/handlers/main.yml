@@ -1,0 +1,13 @@
+---
+# handlers file for base
+
+- name: servico
+  service:
+   name: "{{item.nome}}"
+   state: restarted
+  when: ansible_os_family == item.distro  
+  with_items:
+    - { nome: cron, distro: "Debian" }
+    - { nome: crond, distro: "RedHat" } 
+
+

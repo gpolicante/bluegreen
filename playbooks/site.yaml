@@ -1,0 +1,7 @@
+- name: fazendo o deploy da minha aplicacao 
+  hosts: docker 
+  tasks: 
+   - name: copiando o arquivo do meu site 
+     copy: 
+      src: /opt/jenkins/workspace/deploy/index.html
+      dest: /srv/site/

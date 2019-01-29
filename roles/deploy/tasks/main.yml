@@ -1,0 +1,54 @@
+---
+# tasks file for deploy
+
+- name: verificando o container que esta no ar 
+  stat: 
+   path: /etc/nginx/sites-enabled/green.conf 
+  register: vhost 
+
+
+- name: copiando a index
+  copy: 
+   src: "{{ lookup('env','WORKSPACE' ) }}/index.html"
+   dest: "{{item.destino}}"
+  when: vhost.stat.exists == item.condicao
+  with_items: 
+   - { destino: /srv/green/, condicao: False } 
+   - { destino: /srv/blue/, condicao: True }  
+
+- name: pegando o ip do container green 
+  shell: "docker exec green hostname -I" 
+  when: vhost.stat.exists == False 
+  register: ipgreen 
+
+- name: pegando o ip do container blue 
+  shell: "docker exec blue hostname -I"
+  when: vhost.stat.exists == True 
+  register: ipblue 
+
+
+- name: copiando o template 
+  template:
+   src: "{{item.origem}}"
+   dest: "{{item.destino}}"
+  when: vhost.stat.exists == item.condicao
+  with_items: 
+   - { origem: templates/vhost_green.conf, destino: /etc/nginx/sites-enabled/green.conf, condicao: False }
+   - { origem: templates/vhost_blue.conf, destino: /etc/nginx/sites-enabled/blue.conf, condicao: True }
+
+
+- name: apagando o ambiente 
+  file: 
+   path: "{{item.origem}}"
+   state: absent
+  when: vhost.stat.exists == item.condicao 
+  with_items:
+   - { origem: /etc/nginx/sites-enabled/green.conf, condicao: True }
+   - { origem: /etc/nginx/sites-enabled/blue.conf, condicao: False }
+
+
+
+
+
+
+

@@ -1,0 +1,11 @@
+[automation]
+automation.dexter.com.br 
+
+[docker]
+docker.dexter.com.br 
+
+[devops]
+devops.dexter.com.br 
+
+[all:vars]
+ansible_ssh_private_key_file = /etc/keys/devops.pem 

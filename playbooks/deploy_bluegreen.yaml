@@ -1,0 +1,5 @@
+
+- name: realizando o deploy da aplicacao
+  hosts: docker
+  roles:
+   - deploy 

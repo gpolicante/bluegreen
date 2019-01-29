@@ -1,0 +1,8 @@
+---
+# tasks file for web
+
+- name: install web server apache 
+  include: install.yaml 
+
+- name: site create
+  include: site.yaml 
